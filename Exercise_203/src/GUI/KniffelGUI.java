@@ -1,16 +1,50 @@
 package GUI;
 
-/**
- *
- * @author mikeykahr
- */
+import BL.KniffelEntry;
+import BL.KniffelTableModel;
+import BL.KniffelTableRenderer;
+import Dice.DiceTableModel;
+import Dice.DiceTableRenderer;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ImageIcon;
+
 public class KniffelGUI extends javax.swing.JFrame {
+
+    private Dice.DiceTableModel model = new DiceTableModel();
+    private BL.KniffelTableModel model2 = new KniffelTableModel();
 
     /**
      * Creates new form KniffelGUI
      */
-    public KniffelGUI() {
+    public KniffelGUI() throws IOException {
         initComponents();
+        ImageIcon[] list = {new javax.swing.ImageIcon(getClass().getResource("/res/Alea_1.png")),
+            new javax.swing.ImageIcon(getClass().getResource("/res/Alea_2.png")),
+            new javax.swing.ImageIcon(getClass().getResource("/res/Alea_3.png")),
+            new javax.swing.ImageIcon(getClass().getResource("/res/Alea_4.png")),
+            new javax.swing.ImageIcon(getClass().getResource("/res/Alea_5.png")),
+            new javax.swing.ImageIcon(getClass().getResource("/res/Alea_6.png"))};
+        model.add(list);
+
+        model2.add(new KniffelEntry("Nur Einser", false, 0));
+        model2.add(new KniffelEntry("Nur Zweier", false, 0));
+        model2.add(new KniffelEntry("Nur Dreier", false, 0));
+        model2.add(new KniffelEntry("Nur Vierer", false, 0));
+        model2.add(new KniffelEntry("Nur Fünfer", false, 0));
+        model2.add(new KniffelEntry("Nur Sechser", false, 0));
+        model2.add(new KniffelEntry("Pasch 3", false, 0));
+        model2.add(new KniffelEntry("Pasch 4", false, 0));
+        model2.add(new KniffelEntry("Full House", false, 0));
+        model2.add(new KniffelEntry("Strasse klein", false, 0));
+        model2.add(new KniffelEntry("Strasse groß", false, 0));
+        model2.add(new KniffelEntry("Kniffel", false, 0));
+        jtSelection.setModel(model2);
+        jtSelection.setDefaultRenderer(Object.class, new KniffelTableRenderer());
+        jtDices.setModel(model);
+        jtDices.setDefaultRenderer(Object.class, new DiceTableRenderer());
+        jtDices.getTableHeader().setVisible(false);
     }
 
     /**
@@ -21,22 +55,173 @@ public class KniffelGUI extends javax.swing.JFrame {
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
+        java.awt.GridBagConstraints gridBagConstraints;
+
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jtDices = new javax.swing.JTable();
+        btRoll = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jtSelection = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        tfOS = new javax.swing.JTextField();
+        tfOB = new javax.swing.JTextField();
+        tfUS = new javax.swing.JTextField();
+        tfGS = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jtDices.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jtDices.getTableHeader().setReorderingAllowed(false);
+        jtDices.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtDicesMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jtDices);
+
+        btRoll.setBackground(new java.awt.Color(0, 0, 0));
+        btRoll.setForeground(new java.awt.Color(255, 255, 255));
+        btRoll.setText("Würfeln");
+        btRoll.setBorder(null);
+        btRoll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btRollActionPerformed(evt);
+            }
+        });
+
+        jScrollPane2.setBorder(javax.swing.BorderFactory.createTitledBorder("Gewinnkarte"));
+
+        jtSelection.getTableHeader().setReorderingAllowed(false);
+        jtSelection.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jtSelectionMouseClicked(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jtSelection);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Punkte"));
+        jPanel1.setLayout(new java.awt.GridBagLayout());
+
+        jLabel1.setText("Obere Summe:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.15;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(jLabel1, gridBagConstraints);
+
+        jLabel2.setText("Oberer Bonus:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.15;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(jLabel2, gridBagConstraints);
+
+        jLabel3.setText("Untere Summe:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.15;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(jLabel3, gridBagConstraints);
+
+        jLabel4.setText("Gesamt-Punkte:");
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.15;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(jLabel4, gridBagConstraints);
+
+        tfOS.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.05;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(tfOS, gridBagConstraints);
+
+        tfOB.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 1;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.05;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(tfOB, gridBagConstraints);
+
+        tfUS.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 2;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.05;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(tfUS, gridBagConstraints);
+
+        tfGS.setEditable(false);
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 1;
+        gridBagConstraints.gridy = 3;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.weightx = 0.05;
+        gridBagConstraints.weighty = 0.1;
+        jPanel1.add(tfGS, gridBagConstraints);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addComponent(btRoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jtSelectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtSelectionMouseClicked
+        int r = jtSelection.getSelectedRow();
+        int c = jtSelection.getSelectedColumn();
+        model2.changeState(r);
+    }//GEN-LAST:event_jtSelectionMouseClicked
+
+    private void jtDicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDicesMouseClicked
+        int c = jtDices.getSelectedColumn();
+
+    }//GEN-LAST:event_jtDicesMouseClicked
+
+    private void btRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRollActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btRollActionPerformed
 
     /**
      * @param args the command line arguments
@@ -68,11 +253,29 @@ public class KniffelGUI extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KniffelGUI().setVisible(true);
+                try {
+                    new KniffelGUI().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(KniffelGUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btRoll;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jtDices;
+    private javax.swing.JTable jtSelection;
+    private javax.swing.JTextField tfGS;
+    private javax.swing.JTextField tfOB;
+    private javax.swing.JTextField tfOS;
+    private javax.swing.JTextField tfUS;
     // End of variables declaration//GEN-END:variables
 }
