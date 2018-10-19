@@ -1,6 +1,5 @@
 package Dice;
 
-import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import javax.swing.ImageIcon;
 import javax.swing.table.AbstractTableModel;
@@ -8,6 +7,7 @@ import javax.swing.table.AbstractTableModel;
 public class DiceTableModel extends AbstractTableModel {
     
     private LinkedList<ImageIcon[]>images = new LinkedList<>();
+    
     
     public void add(ImageIcon[] i){
         images.add(i);
