@@ -5,28 +5,32 @@ import BL.KniffelTableModel;
 import BL.KniffelTableRenderer;
 import Dice.DiceTableModel;
 import Dice.DiceTableRenderer;
+import Dice.RowEntry;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class KniffelGUI extends javax.swing.JFrame {
 
     private Dice.DiceTableModel model = new DiceTableModel();
     private BL.KniffelTableModel model2 = new KniffelTableModel();
+    private int wcount=0;
 
     /**
      * Creates new form KniffelGUI
      */
     public KniffelGUI() throws IOException {
         initComponents();
-        ImageIcon[] list = {new javax.swing.ImageIcon(getClass().getResource("/res/Alea_1.png")),
+        ImageIcon[] ilist = {new javax.swing.ImageIcon(getClass().getResource("/res/Alea_1.png")),
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_2.png")),
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_3.png")),
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_4.png")),
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_5.png")),
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_6.png"))};
-        model.add(list);
+        boolean[] blist = {false, false, false, false, false};
+        model.add(new RowEntry(ilist, blist));
 
         model2.add(new KniffelEntry("Nur Einser", false, 0));
         model2.add(new KniffelEntry("Nur Zweier", false, 0));
@@ -43,8 +47,15 @@ public class KniffelGUI extends javax.swing.JFrame {
         jtSelection.setModel(model2);
         jtSelection.setDefaultRenderer(Object.class, new KniffelTableRenderer());
         jtDices.setModel(model);
+        try{
         jtDices.setDefaultRenderer(Object.class, new DiceTableRenderer());
+        }
+        catch(Exception ex){
+            
+        }
         jtDices.getTableHeader().setVisible(false);
+        jtDices.setRowHeight(112);
+
     }
 
     /**
@@ -188,7 +199,7 @@ public class KniffelGUI extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 449, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 550, Short.MAX_VALUE)
             .addComponent(btRoll, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,13 +207,13 @@ public class KniffelGUI extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 162, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btRoll, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -214,12 +225,26 @@ public class KniffelGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jtSelectionMouseClicked
 
     private void jtDicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDicesMouseClicked
-        int c = jtDices.getSelectedColumn();
-
+        try {
+            int c = jtDices.getSelectedColumn();
+            int r = 0;
+            model.changeState(r, c);
+        } catch (Exception ex) {
+            System.out.println(jtDices.getSelectedColumn());
+        }
     }//GEN-LAST:event_jtDicesMouseClicked
 
     private void btRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRollActionPerformed
-        // TODO add your handling code here:
+        //model.getImages().get(0).shuffle();
+        wcount++;
+        if(wcount<4){
+                   model.mix(); 
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "Du hast bereits 3 mal gewürfelt!!");
+        }
+
+        
     }//GEN-LAST:event_btRollActionPerformed
 
     /**

@@ -23,7 +23,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jScrollPane1" pref="449" max="32767" attributes="0"/>
+          <Component id="jScrollPane1" pref="550" max="32767" attributes="0"/>
           <Component id="btRoll" alignment="0" max="32767" attributes="0"/>
           <Component id="jScrollPane2" alignment="1" pref="0" max="32767" attributes="0"/>
           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
@@ -32,13 +32,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <Component id="jScrollPane1" min="-2" pref="79" max="-2" attributes="0"/>
+              <Component id="jScrollPane1" pref="162" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="btRoll" min="-2" pref="26" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jScrollPane2" min="-2" pref="276" max="-2" attributes="0"/>
+              <Component id="jScrollPane2" min="-2" pref="255" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jPanel1" max="32767" attributes="0"/>
+              <Component id="jPanel1" min="-2" pref="178" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
