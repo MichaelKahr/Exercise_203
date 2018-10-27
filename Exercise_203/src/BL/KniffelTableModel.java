@@ -109,10 +109,20 @@ public class KniffelTableModel extends AbstractTableModel {
                         e.setPoints(r);
                         oPunkte += r;
                         break;
+                    case "Pasch 3":
+                        r = pasch3(dices);
+                        e.setPoints(r);
+                        uPunkte+=r;
+                        break;
+                    case "Pasch 4":
+                        r = pasch4(dices);
+                        e.setPoints(r);
+                        uPunkte+=r;
+                        break;
                     case "Full House":
                         r = fHouse(dices);
                         e.setPoints(r);
-                        uPunkte+=r;
+                        uPunkte += r;
                         break;
                     case "Strasse klein":
                         r = kStr(dices);
@@ -156,20 +166,69 @@ public class KniffelTableModel extends AbstractTableModel {
         }
     }
 
-    private int pasch(int[] dices, int c) {
-        boolean p = false;
-        int pa = 0;
-        for (int i = 0; i < dices.length; i++) {
-            if (dices[i] == dices[i + 1]) {
-                p = true;
-                pa++;
-                if (pa == c) {
-                    break;
-                }
-            } else {
-                p = false;
-            }
+    private int pasch3(int[] dices) {
+          int s = 0;
+          int n1 = dices[0];
+          int c1 = 0;
+          int n2 = dices[1];
+          int c2 = 0;
+          int n3 = dices[2];
+          int c3 = 0;
+          for (int dice : dices) {
+              s+=dice;
+              if(dice==n1){
+                  c1++;
+              }
+              else if (dice==n2){
+                  c2++;
+              }
+              else if(dice==n3){
+                  c3++;
+              }
         }
+        if(c1==3||c1==4){
+            return s;
+        }
+        else if(c2==3||c2==4){
+            return s;
+        }
+        else if(c3==3||c3==4){
+            return s;
+        }
+        return 0;
+
+    }
+        private int pasch4(int[] dices) {
+          int s = 0;
+          int n1 = dices[0];
+          int c1 = 0;
+          int n2 = dices[1];
+          int c2 = 0;
+          int n3 = dices[2];
+          int c3 = 0;
+          for (int dice : dices) {
+              s+=dice;
+              if(dice==n1){
+                  c1++;
+              }
+              else if (dice==n2){
+                  c2++;
+              }
+              else if(dice==n3){
+                  c3++;
+              }
+        }
+        if(c1==4){
+            return s;
+        }
+        else if(c2==4){
+            return s;
+        }
+        else if(c3==4){
+            return s;
+        }
+        return 0;
+
     }
 
     private int kStr(int[] dices) {
@@ -203,18 +262,18 @@ public class KniffelTableModel extends AbstractTableModel {
         }
         //System.out.println(c1);
         for (int dice : dices) {
-            if(dice!=p1){
-                p2=dice;
+            if (dice != p1) {
+                p2 = dice;
                 break;
             }
         }
         for (int dice : dices) {
-            if(dice==p2){
+            if (dice == p2) {
                 c2++;
             }
         }
         //System.out.println(c2);
-        if((c1==3&&c2==2)||(c1==2&&c2==3)){
+        if ((c1 == 3 && c2 == 2) || (c1 == 2 && c2 == 3)) {
             return 25;
         }
         return 0;
