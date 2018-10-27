@@ -201,7 +201,7 @@ public class KniffelTableModel extends AbstractTableModel {
                 c1++;
             }
         }
-        System.out.println(c1);
+        //System.out.println(c1);
         for (int dice : dices) {
             if(dice!=p1){
                 p2=dice;
@@ -213,7 +213,7 @@ public class KniffelTableModel extends AbstractTableModel {
                 c2++;
             }
         }
-        System.out.println(c2);
+        //System.out.println(c2);
         if((c1==3&&c2==2)||(c1==2&&c2==3)){
             return 25;
         }

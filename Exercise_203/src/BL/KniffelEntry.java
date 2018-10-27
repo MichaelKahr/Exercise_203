@@ -1,5 +1,7 @@
 package BL;
+
 public class KniffelEntry {
+
     private String name;
     private boolean selected;
     private int points;
@@ -33,7 +35,5 @@ public class KniffelEntry {
     public void setPoints(int points) {
         this.points = points;
     }
-    
-    
 
 }
