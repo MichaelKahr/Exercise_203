@@ -16,7 +16,14 @@ public class KniffelGUI extends javax.swing.JFrame {
 
     private Dice.DiceTableModel model = new DiceTableModel();
     private BL.KniffelTableModel model2 = new KniffelTableModel();
-    private int wcount=0;
+    private int wcount = 0;
+
+    public void setPoints() {
+        tfOS.setText(model2.getoPunkte() + "");
+        tfOB.setText(model2.getoBonus() + "");
+        tfUS.setText(model2.getuPunkte() + "");
+        tfGS.setText(model2.getGesPunkte() + "");
+    }
 
     /**
      * Creates new form KniffelGUI
@@ -30,6 +37,7 @@ public class KniffelGUI extends javax.swing.JFrame {
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_5.png")),
             new javax.swing.ImageIcon(getClass().getResource("/res/Alea_6.png"))};
         boolean[] blist = {false, false, false, false, false};
+        //System.out.println(ilist[1].getDescription());
         model.add(new RowEntry(ilist, blist));
 
         model2.add(new KniffelEntry("Nur Einser", false, 0));
@@ -47,15 +55,15 @@ public class KniffelGUI extends javax.swing.JFrame {
         jtSelection.setModel(model2);
         jtSelection.setDefaultRenderer(Object.class, new KniffelTableRenderer());
         jtDices.setModel(model);
-        try{
-        jtDices.setDefaultRenderer(Object.class, new DiceTableRenderer());
-        }
-        catch(Exception ex){
-            
+        try {
+            jtDices.setDefaultRenderer(Object.class, new DiceTableRenderer());
+        } catch (Exception ex) {
+
         }
         jtDices.getTableHeader().setVisible(false);
         jtDices.setRowHeight(112);
-
+        //model.mix();
+        setPoints();
     }
 
     /**
@@ -229,22 +237,24 @@ public class KniffelGUI extends javax.swing.JFrame {
             int c = jtDices.getSelectedColumn();
             int r = 0;
             model.changeState(r, c);
+            setPoints();
         } catch (Exception ex) {
-            System.out.println(jtDices.getSelectedColumn());
+            //System.out.println(jtDices.getSelectedColumn());
         }
     }//GEN-LAST:event_jtDicesMouseClicked
 
     private void btRollActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRollActionPerformed
         //model.getImages().get(0).shuffle();
         wcount++;
-        if(wcount<4){
-                   model.mix(); 
-        }
-        else{
+        if (wcount < 100) {
+            model.mix();
+            model2.points();
+            setPoints();
+        } else {
             JOptionPane.showMessageDialog(null, "Du hast bereits 3 mal gewürfelt!!");
         }
 
-        
+
     }//GEN-LAST:event_btRollActionPerformed
 
     /**
