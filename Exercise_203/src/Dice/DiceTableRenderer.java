@@ -23,7 +23,7 @@ public class DiceTableRenderer implements TableCellRenderer {
 
         JLabel label = new JLabel();
         label.setOpaque(true);
-        System.out.println("cell render: " + column);
+        //System.out.println("cell render: " + column);
 
         switch (column) {
             case 0:

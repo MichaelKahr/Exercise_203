@@ -230,6 +230,7 @@ public class KniffelGUI extends javax.swing.JFrame {
     private void jtSelectionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtSelectionMouseClicked
         int r = jtSelection.getSelectedRow();
         model2.changeState(r);
+        setPoints();
     }//GEN-LAST:event_jtSelectionMouseClicked
 
     private void jtDicesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtDicesMouseClicked

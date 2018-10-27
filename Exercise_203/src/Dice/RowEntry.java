@@ -7,14 +7,22 @@ public class RowEntry {
 
     private ImageIcon[] images;
     private boolean[] sel;
-    private ImageIcon[] timages = {new ImageIcon(), new ImageIcon(), new ImageIcon(), new ImageIcon(), new ImageIcon()};
-    private int imgcount;
-    private int scount;
+    private ImageIcon[] timages = {new javax.swing.ImageIcon(getClass().getResource("/res/Alea_1.png")),
+        new javax.swing.ImageIcon(getClass().getResource("/res/Alea_2.png")),
+        new javax.swing.ImageIcon(getClass().getResource("/res/Alea_3.png")),
+        new javax.swing.ImageIcon(getClass().getResource("/res/Alea_4.png")),
+        new javax.swing.ImageIcon(getClass().getResource("/res/Alea_5.png")),
+        new javax.swing.ImageIcon(getClass().getResource("/res/Alea_6.png"))};
+    public static int[] numbers = {0, 0, 0, 0, 0};
 
     public RowEntry(ImageIcon[] images, boolean[] sel) {
         this.images = images;
         this.sel = sel;
-        timages = this.images;
+        shuffle();
+        //System.out.println(timages[1].getDescription().substring(timages[1].getDescription().length()-5, timages[1].getDescription().length()-4));
+        //System.out.println(images[1].getDescription().substring(images[1].getDescription().length()-5, images[1].getDescription().length()-4));
+        getNum();
+
     }
 
     public ImageIcon[] getImages() {
@@ -38,34 +46,18 @@ public class RowEntry {
     }
 
     public void shuffle() {
-//        imgcount = 0;
-//        for (int i = 0; i < images.length - 1; i++) {
-//            if (sel[i] == false) {
-//                timages[imgcount] = images[i];
-//                imgcount++;
-//            }
-//        }
-//        Random rnd = new Random();
-//        for (int i = timages.length - 1; i > 0; i--) {
-//            int index = rnd.nextInt(i + 1);
-//            // Simple swap
-//            ImageIcon a = timages[index];
-//            timages[index] = timages[i];
-//            timages[i] = a;
-//        }
-//        scount=0;
-//        for(int i = 0; i<images.length-1;i++){
-//            if(sel[i]==false){
-//                images[i]=timages[scount];
-//                scount++;
-//            }
-//        }
-//        
-//        System.out.println(imgcount);
-        for (int i = 0; i < images.length - 1; i++) {
+        for (int i = 0; i < 5; i++) {
             if (sel[i] == false) {
                 images[i] = timages[new Random().nextInt(6)];
             }
+        }
+    }
+
+    public void getNum() {
+        for (int i = 0; i < images.length - 1; i++) {
+            //System.out.println(images[i].getDescription().substring(images[i].getDescription().length()-5, images[i].getDescription().length()-4));
+            numbers[i] = Integer.parseInt(images[i].getDescription().substring(images[i].getDescription().length() - 5, images[i].getDescription().length() - 4));
+            //System.out.println(numbers[i]);
         }
     }
 
